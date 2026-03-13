@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: logistics
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 500MB
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: false
+    date-format: yyyy-MM-dd'T'HH:mm:ss
+
+api:
+  base-path: /api
+  version: v1

@@ -1,0 +1,421 @@
+{
+  "info": {
+    "name": "Logistics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8085/api/v1" },
+    { "key": "token",   "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/register",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res.token) { pm.collectionVariables.set('token', res.token); }"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/login",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Clients",
+      "item": [
+        {
+          "name": "Get all clients",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/clients",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] }
+          }
+        },
+        {
+          "name": "Get client by id",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/clients/1",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] }
+          }
+        },
+        {
+          "name": "Create client",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/clients",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Empresa Logística S.A.\",\n  \"email\": \"contacto@empresa.com\",\n  \"phone\": \"3001234567\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Update client",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/clients/1",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Empresa Logística Actualizada\",\n  \"email\": \"nuevo@empresa.com\",\n  \"phone\": \"3009876543\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete client",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/clients/1",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Product Types",
+      "item": [
+        {
+          "name": "Get all product types",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/product-types",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] }
+          }
+        },
+        {
+          "name": "Get product type by id",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/product-types/1",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] }
+          }
+        },
+        {
+          "name": "Create product type",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/product-types",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Electrónicos\",\n  \"description\": \"Dispositivos y componentes electrónicos\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Update product type",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/product-types/1",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Electrónicos Actualizado\",\n  \"description\": \"Descripción actualizada\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete product type",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/product-types/1",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Warehouses",
+      "item": [
+        {
+          "name": "Get all warehouses",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/warehouses",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] }
+          }
+        },
+        {
+          "name": "Get warehouse by id",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/warehouses/1",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] }
+          }
+        },
+        {
+          "name": "Create warehouse",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/warehouses",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Bodega Central Bogotá\",\n  \"address\": \"Calle 80 # 45-23\",\n  \"city\": \"Bogotá\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Update warehouse",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/warehouses/1",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Bodega Central Actualizada\",\n  \"address\": \"Carrera 15 # 10-50\",\n  \"city\": \"Medellín\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete warehouse",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/warehouses/1",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Ports",
+      "item": [
+        {
+          "name": "Get all ports",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ports",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] }
+          }
+        },
+        {
+          "name": "Get port by id",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ports/1",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] }
+          }
+        },
+        {
+          "name": "Create port - national",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/ports",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Puerto de Barranquilla\",\n  \"city\": \"Barranquilla\",\n  \"country\": \"Colombia\",\n  \"portType\": \"N\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Create port - international",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/ports",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Port of Miami\",\n  \"city\": \"Miami\",\n  \"country\": \"United States\",\n  \"portType\": \"I\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Update port",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/ports/1",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Puerto de Barranquilla Actualizado\",\n  \"city\": \"Barranquilla\",\n  \"country\": \"Colombia\",\n  \"portType\": \"N\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete port",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/ports/1",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Land Shipments",
+      "item": [
+        {
+          "name": "Get all land shipments",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/land-shipments",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] }
+          }
+        },
+        {
+          "name": "Get land shipment by id",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/land-shipments/1",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] }
+          }
+        },
+        {
+          "name": "Create land shipment - no discount (qty <= 10)",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/land-shipments",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clientId\": 1,\n  \"productTypeId\": 1,\n  \"warehouseId\": 1,\n  \"quantity\": 5,\n  \"deliveryDate\": \"2026-04-01\",\n  \"trackingNumber\": \"ABC1234567\",\n  \"vehiclePlate\": \"ABC123\",\n  \"basePrice\": 150000.00\n}"
+            }
+          }
+        },
+        {
+          "name": "Create land shipment - with 5% discount (qty > 10)",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/land-shipments",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clientId\": 1,\n  \"productTypeId\": 1,\n  \"warehouseId\": 1,\n  \"quantity\": 15,\n  \"deliveryDate\": \"2026-04-01\",\n  \"trackingNumber\": \"XYZ9876543\",\n  \"vehiclePlate\": \"XYZ987\",\n  \"basePrice\": 150000.00\n}"
+            }
+          }
+        },
+        {
+          "name": "Update land shipment",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/land-shipments/1",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clientId\": 1,\n  \"productTypeId\": 1,\n  \"warehouseId\": 1,\n  \"quantity\": 8,\n  \"deliveryDate\": \"2026-05-01\",\n  \"trackingNumber\": \"ABC1234567\",\n  \"vehiclePlate\": \"DEF456\",\n  \"basePrice\": 200000.00\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete land shipment",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/land-shipments/1",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sea Shipments",
+      "item": [
+        {
+          "name": "Get all sea shipments",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/sea-shipments",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] }
+          }
+        },
+        {
+          "name": "Get sea shipment by id",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/sea-shipments/1",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] }
+          }
+        },
+        {
+          "name": "Create sea shipment - no discount (qty <= 10)",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/sea-shipments",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clientId\": 1,\n  \"productTypeId\": 1,\n  \"portId\": 1,\n  \"quantity\": 5,\n  \"deliveryDate\": \"2026-04-15\",\n  \"trackingNumber\": \"MAR1234567\",\n  \"fleetNumber\": \"MAR1234A\",\n  \"basePrice\": 800000.00\n}"
+            }
+          }
+        },
+        {
+          "name": "Create sea shipment - with 3% discount (qty > 10)",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/sea-shipments",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clientId\": 1,\n  \"productTypeId\": 1,\n  \"portId\": 1,\n  \"quantity\": 20,\n  \"deliveryDate\": \"2026-04-15\",\n  \"trackingNumber\": \"SEA9876543\",\n  \"fleetNumber\": \"SEA5678B\",\n  \"basePrice\": 800000.00\n}"
+            }
+          }
+        },
+        {
+          "name": "Update sea shipment",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/sea-shipments/1",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clientId\": 1,\n  \"productTypeId\": 1,\n  \"portId\": 1,\n  \"quantity\": 8,\n  \"deliveryDate\": \"2026-05-15\",\n  \"trackingNumber\": \"MAR1234567\",\n  \"fleetNumber\": \"UPD1234C\",\n  \"basePrice\": 950000.00\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete sea shipment",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/sea-shipments/1",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] }
+          }
+        }
+      ]
+    }
+  ]
+}

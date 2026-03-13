@@ -1,0 +1,32 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://192.168.100.122:3007/sinergia
+    username: ilbeol-dev
+    password: cccccccccccccc
+
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    enabled: true
+
+# Configuración de logging
+logging:
+  level:
+    com.ejemplo: DEBUG
+    org.hibernate.SQL: error
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      # show-details: when_authorized # SOLO PROD
+      show-details: always # SOLO TEST - http://localhost:8085/actuator/health
+
+jwt:
+  secret: my-super-secret-key-of-at-least-256-bits-for-hs256
+
+server:
+  port: 8085
