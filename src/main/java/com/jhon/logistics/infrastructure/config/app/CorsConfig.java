@@ -18,6 +18,7 @@ public class CorsConfig {
         config.setAllowedOrigins(List.of(
                 "http://localhost:3003",
                 "http://localhost:3004",
+                "https://logistics.ilbeol.org",
                 "http://192.168.100.122:3004",
                 "http://localhost:5173"
         ));
